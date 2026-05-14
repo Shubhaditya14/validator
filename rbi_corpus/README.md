@@ -51,16 +51,14 @@ Suggested starter set:
 - KYC Master Direction
 - Outsourcing of Financial Services
 
-Optional: generate a starter metadata file to keep titles and dates in one place:
+The repository includes a prefilled `data/raw_pdfs/links.json` with RBI PDF
+links for the starter set. If you want to regenerate the stub, run:
 
 ```bash
-python scripts/download_links.py
+python scripts/download_links.py --links data/raw_pdfs/links.json --force
 ```
 
-This creates `data/raw_pdfs/links.json`. Update the `url` values and make sure
-your PDF file names match the `id` field (for example, `digital_lending.pdf`).
-
-To download automatically once URLs are filled:
+To download automatically using the provided URLs:
 
 ```bash
 python scripts/download_links.py
@@ -81,7 +79,7 @@ data/extracted/rbi_circulars.jsonl
 Each line is a JSON object like:
 
 ```json
-{"id":"digital_lending","title":"Digital Lending Guidelines","category":"digital_lending","date":"2022-09-02","source":"data/raw_pdfs/digital_lending.pdf","text":"..."}
+{"id":"digital_lending","title":"Reserve Bank of India (Digital Lending) Directions, 2025","category":"digital_lending","date":"2025-05-08","source":"data/raw_pdfs/digital_lending.pdf","text":"..."}
 ```
 
 ## Step 3: Build Processed JSONL (Optional Chunking)

@@ -1,0 +1,44 @@
+[
+  {
+    "id": "nbfc_master_direction",
+    "title": "Master Direction - Reserve Bank of India (Non-Banking Financial Company - Scale Based Regulation) Directions, 2023",
+    "category": "nbfc",
+    "date": "2023-10-19",
+    "url": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/106MDNBFCS1910202343073E3EF57A4916AA5042911CD8D562.PDF"
+  },
+  {
+    "id": "fair_practices_code",
+    "title": "Loans Sourced by Banks and NBFCs over Digital Lending Platforms: Adherence to Fair Practices Code and Outsourcing Guidelines",
+    "category": "fair_practices",
+    "date": "2020-06-24",
+    "url": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/CCN112LNBCF387F4EE693D74EA6A70E6938C7CDCE47.PDF"
+  },
+  {
+    "id": "digital_lending",
+    "title": "Reserve Bank of India (Digital Lending) Directions, 2025",
+    "category": "digital_lending",
+    "date": "2025-05-08",
+    "url": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/36NT8C402BE7C2A349E0BFFF3C526668CD7A.PDF"
+  },
+  {
+    "id": "co_lending_model",
+    "title": "Co-Lending by Banks and NBFCs to Priority Sector",
+    "category": "co_lending",
+    "date": "2020-11-05",
+    "url": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/NT6300DF94088B674E7FB6FC7EEC214B0200.PDF"
+  },
+  {
+    "id": "kyc_master_direction",
+    "title": "Master Direction - Know Your Customer (KYC) Direction, 2016",
+    "category": "kyc",
+    "date": "2016-02-25",
+    "url": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/MD18KYCF6E92C82E1E1419D87323E3869BC9F13.PDF"
+  },
+  {
+    "id": "outsourcing_financial_services",
+    "title": "Guidelines on Managing Risks and Code of Conduct in Outsourcing of Financial Services by banks",
+    "category": "outsourcing",
+    "date": "2006-11-03",
+    "url": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/73713.PDF"
+  }
+]
