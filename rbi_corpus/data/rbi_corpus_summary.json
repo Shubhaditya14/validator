@@ -1,0 +1,109 @@
+{
+  "goal": "Build a small RBI regulatory/legal corpus pipeline for downloading RBI PDFs, extracting text, cleaning it, and producing JSONL files for downstream RAG, rule generation, or training workflows.",
+  "pipeline": [
+    {
+      "step": 1,
+      "description": "Store RBI PDF metadata and direct PDF URLs.",
+      "path": "rbi_corpus/data/raw_pdfs/links.json"
+    },
+    {
+      "step": 2,
+      "description": "Download PDFs.",
+      "path": "rbi_corpus/data/raw_pdfs/"
+    },
+    {
+      "step": 3,
+      "description": "Extract and clean text.",
+      "path": "rbi_corpus/data/extracted/rbi_circulars.jsonl"
+    },
+    {
+      "step": 4,
+      "description": "Build processed or chunked JSONL.",
+      "path": "rbi_corpus/data/processed/rbi_circulars_processed.jsonl"
+    }
+  ],
+  "scripts": [
+    {
+      "path": "rbi_corpus/scripts/download_links.py",
+      "purpose": "Downloads PDFs from links.json."
+    },
+    {
+      "path": "rbi_corpus/scripts/extract_text.py",
+      "purpose": "Extracts text from downloaded PDFs using pdfplumber first, with PyMuPDF fallback."
+    },
+    {
+      "path": "rbi_corpus/scripts/clean_text.py",
+      "purpose": "Shared text cleaning helper."
+    },
+    {
+      "path": "rbi_corpus/scripts/build_jsonl.py",
+      "purpose": "Builds processed JSONL and supports chunking."
+    }
+  ],
+  "commands": [
+    "cd rbi_corpus/scripts",
+    "python3 download_links.py",
+    "python3 extract_text.py",
+    "python3 build_jsonl.py",
+    "python3 build_jsonl.py --chunk --chunk-size 1200"
+  ],
+  "current_links": [
+    {
+      "id": "nbfc_master_direction",
+      "title": "Master Direction - Reserve Bank of India (Non-Banking Financial Company - Scale Based Regulation) Directions, 2023",
+      "category": "nbfc",
+      "date": "2023-10-19",
+      "url": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/106MDNBFCS1910202343073E3EF57A4916AA5042911CD8D562.PDF"
+    },
+    {
+      "id": "fair_practices_code",
+      "title": "Loans Sourced by Banks and NBFCs over Digital Lending Platforms: Adherence to Fair Practices Code and Outsourcing Guidelines",
+      "category": "fair_practices",
+      "date": "2020-06-24",
+      "url": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/CCN112LNBCF387F4EE693D74EA6A70E6938C7CDCE47.PDF"
+    },
+    {
+      "id": "digital_lending",
+      "title": "Reserve Bank of India (Digital Lending) Directions, 2025",
+      "category": "digital_lending",
+      "date": "2025-05-08",
+      "url": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/36NT8C402BE7C2A349E0BFFF3C526668CD7A.PDF"
+    },
+    {
+      "id": "co_lending_model",
+      "title": "Co-Lending by Banks and NBFCs to Priority Sector",
+      "category": "co_lending",
+      "date": "2020-11-05",
+      "url": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/NT6300DF94088B674E7FB6FC7EEC214B0200.PDF"
+    },
+    {
+      "id": "kyc_master_direction",
+      "title": "Master Direction - Know Your Customer (KYC) Direction, 2016",
+      "category": "kyc",
+      "date": "2016-02-25",
+      "url": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/MD18KYCF6E92C82E1E1419D87323E3869BC9F13.PDF"
+    },
+    {
+      "id": "outsourcing_financial_services",
+      "title": "Guidelines on Managing Risks and Code of Conduct in Outsourcing of Financial Services by banks",
+      "category": "outsourcing",
+      "date": "2006-11-03",
+      "url": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/73713.PDF"
+    }
+  ],
+  "useful_rbi_pages": [
+    "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+    "https://www.rbi.org.in/Scripts/BS_ViewMasterDirections.aspx",
+    "https://www.rbi.org.in/Scripts/FS_Notification.aspx?fn=14",
+    "https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=12848&Mode=0",
+    "https://www.rbi.org.in/Scripts/FS_Notification.aspx?Id=11991&fn=2754&Mode=0",
+    "https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=11959&Mode=0",
+    "https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=12382&Mode=0"
+  ],
+  "notes": [
+    "Prefer direct rbidocs.rbi.org.in PDF URLs for reliable downloads.",
+    "Some broad RBI page scans timed out, so extra links should be verified before adding them to links.json.",
+    "The digital lending page Id=12382 was found with a direct PDF link during earlier scanning: https://rbidocs.rbi.org.in/rdocs/notification/PDFs/GUIDELINESDIGITALLENDINGD5C35A71D8124A0E92AEB940A7D25BB3.PDF",
+    "The page Id=11959 matched co-lending related search terms, but the found PDF appeared to be PSL-related and should be verified before use: https://rbidocs.rbi.org.in/rdocs/notification/PDFs/MDPSL803EE903174E4C85AFA14C335A5B0909.PDF"
+  ]
+}

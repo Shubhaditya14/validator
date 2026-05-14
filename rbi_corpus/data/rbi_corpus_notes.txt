@@ -1,0 +1,105 @@
+RBI Corpus Project Notes
+========================
+
+Goal
+----
+Build a small RBI regulatory/legal corpus pipeline for downloading RBI PDFs,
+extracting text, cleaning it, and producing JSONL files for downstream RAG,
+rule generation, or training workflows.
+
+Current Pipeline
+----------------
+1. Store RBI PDF metadata and direct PDF URLs in:
+   rbi_corpus/data/raw_pdfs/links.json
+
+2. Download PDFs into:
+   rbi_corpus/data/raw_pdfs/
+
+3. Extract and clean text into:
+   rbi_corpus/data/extracted/rbi_circulars.jsonl
+
+4. Build processed or chunked JSONL into:
+   rbi_corpus/data/processed/rbi_circulars_processed.jsonl
+
+Scripts
+-------
+- rbi_corpus/scripts/download_links.py
+  Downloads PDFs from links.json.
+
+- rbi_corpus/scripts/extract_text.py
+  Extracts text from downloaded PDFs using pdfplumber first, with PyMuPDF fallback.
+
+- rbi_corpus/scripts/clean_text.py
+  Shared text cleaning helper.
+
+- rbi_corpus/scripts/build_jsonl.py
+  Builds processed JSONL and supports chunking.
+
+Run Commands
+------------
+Use python3 if python is unavailable.
+
+cd rbi_corpus/scripts
+python3 download_links.py
+python3 extract_text.py
+python3 build_jsonl.py
+
+Optional chunked output:
+python3 build_jsonl.py --chunk --chunk-size 1200
+
+Current RBI PDF Links
+---------------------
+1. nbfc_master_direction
+   Title: Master Direction - Reserve Bank of India (Non-Banking Financial Company - Scale Based Regulation) Directions, 2023
+   Category: nbfc
+   Date: 2023-10-19
+   URL: https://rbidocs.rbi.org.in/rdocs/notification/PDFs/106MDNBFCS1910202343073E3EF57A4916AA5042911CD8D562.PDF
+
+2. fair_practices_code
+   Title: Loans Sourced by Banks and NBFCs over Digital Lending Platforms: Adherence to Fair Practices Code and Outsourcing Guidelines
+   Category: fair_practices
+   Date: 2020-06-24
+   URL: https://rbidocs.rbi.org.in/rdocs/notification/PDFs/CCN112LNBCF387F4EE693D74EA6A70E6938C7CDCE47.PDF
+
+3. digital_lending
+   Title: Reserve Bank of India (Digital Lending) Directions, 2025
+   Category: digital_lending
+   Date: 2025-05-08
+   URL: https://rbidocs.rbi.org.in/rdocs/notification/PDFs/36NT8C402BE7C2A349E0BFFF3C526668CD7A.PDF
+
+4. co_lending_model
+   Title: Co-Lending by Banks and NBFCs to Priority Sector
+   Category: co_lending
+   Date: 2020-11-05
+   URL: https://rbidocs.rbi.org.in/rdocs/notification/PDFs/NT6300DF94088B674E7FB6FC7EEC214B0200.PDF
+
+5. kyc_master_direction
+   Title: Master Direction - Know Your Customer (KYC) Direction, 2016
+   Category: kyc
+   Date: 2016-02-25
+   URL: https://rbidocs.rbi.org.in/rdocs/notification/PDFs/MD18KYCF6E92C82E1E1419D87323E3869BC9F13.PDF
+
+6. outsourcing_financial_services
+   Title: Guidelines on Managing Risks and Code of Conduct in Outsourcing of Financial Services by banks
+   Category: outsourcing
+   Date: 2006-11-03
+   URL: https://rbidocs.rbi.org.in/rdocs/notification/PDFs/73713.PDF
+
+Useful RBI Pages / Sources
+--------------------------
+- https://www.rbi.org.in/Scripts/NotificationUser.aspx
+- https://www.rbi.org.in/Scripts/BS_ViewMasterDirections.aspx
+- https://www.rbi.org.in/Scripts/FS_Notification.aspx?fn=14
+- https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=12848&Mode=0
+- https://www.rbi.org.in/Scripts/FS_Notification.aspx?Id=11991&fn=2754&Mode=0
+- https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=11959&Mode=0
+- https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=12382&Mode=0
+
+Known Notes
+-----------
+- Prefer direct rbidocs.rbi.org.in PDF URLs for reliable downloads.
+- Some broad RBI page scans timed out, so extra links should be verified before adding them to links.json.
+- The digital lending page Id=12382 was found with a direct PDF link during earlier scanning:
+  https://rbidocs.rbi.org.in/rdocs/notification/PDFs/GUIDELINESDIGITALLENDINGD5C35A71D8124A0E92AEB940A7D25BB3.PDF
+- The page Id=11959 matched co-lending related search terms, but the found PDF appeared to be PSL-related and should be verified before use:
+  https://rbidocs.rbi.org.in/rdocs/notification/PDFs/MDPSL803EE903174E4C85AFA14C335A5B0909.PDF
